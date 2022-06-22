@@ -20,6 +20,19 @@ QString GcodeFile::getThumbnailPath()
     return m_thumbnailPath;
 }
 
+void GcodeFile::setSize(const int &size)
+{
+    if(m_size != size){
+        m_size = size;
+        emit sizeChanged(m_size);
+    }
+}
+
+int GcodeFile::getSize()
+{
+    return m_size;
+}
+
 namespace{
 void registerTypes(){
     qmlRegisterType<GcodeFile>("Zmorph.Interview", 1, 0, "GcodeFile");

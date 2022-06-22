@@ -2,7 +2,8 @@
 #include <QtQml>
 #include <QtDebug>
 #include <QDir>
-//#include <QFile
+#include <QFile>
+#include <iostream>
 
 GcodeFileController::GcodeFileController(QObject *parent)
     : QObject(parent)
@@ -13,8 +14,13 @@ GcodeFileController::GcodeFileController(QObject *parent)
         auto gcode = new GcodeFile();
         gcode->setThumbnailPath(QString("file:///%1").arg(file.absoluteFilePath()));
         appendGcodeFileToList(gcode);
-    }
+
+        gcode->setSize(file.size());
+
+        }
+
 }
+
 
 QQmlListProperty<GcodeFile> GcodeFileController::getGcodeFiles()
 {

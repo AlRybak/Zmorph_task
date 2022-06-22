@@ -4,7 +4,6 @@ import Zmorph.Interview 1.0
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 
-
 Window {
     width: 800
     height: 800
@@ -12,16 +11,7 @@ Window {
     title: qsTr("Hello World")
     color: "dimgrey"
 
-   /* MouseArea {
-        anchors.fill: parent
-        onPressed: {
-            console.log("kliknales poza obszar")
-        }
-    }*/
-
-
     GridLayout {
-        id: grid
         Layout.alignment: Qt.AlignCenter
         anchors.fill: parent
         anchors.margins: 50
@@ -32,8 +22,7 @@ Window {
         ListView {
             id: list
             model: gcodeFileController.gcodeFiles
-            //anchors.fill: parent
-
+            anchors.fill: parent
         }
 
         Repeater {
@@ -41,12 +30,12 @@ Window {
             delegate: Rectangle {
                 id: myRectangle
                 Layout.alignment: Qt.AlignCenter
-                Layout.minimumWidth: 150
-                Layout.maximumWidth: 250
-                Layout.minimumHeight: 150
-                Layout.maximumHeight: 250
-                //Layout.fillWidth: true
-                //Layout.fillHeight: true
+                //Layout.minimumWidth: 150
+                //Layout.maximumWidth: 250
+                //Layout.minimumHeight: 150
+                //Layout.maximumHeight: 250
+                Layout.fillWidth: true
+                Layout.fillHeight: true
                 color: "dimgrey"
                     Image {
                         anchors.fill: parent
@@ -59,11 +48,13 @@ Window {
                         onPressed: {
                             list.currentIndex = index
                             parent.color = "mediumpurple"
-                            showpath.text = thumbnailPath
+                            showPath.text = "Ścieżka: " + thumbnailPath
+                            showSize.text = "Rozmiar pliku: " + size + " bajtów"
                         }
                         onReleased: {
                             parent.color = "dimgrey"
-                            showpath.text = null
+                            showPath.text = null
+                            showSize.text = null
                         }
 
                         cursorShape: Qt.PointingHandCursor
@@ -71,26 +62,25 @@ Window {
             }
         }
 
-
         Rectangle {
             id: blueRectangle
             Layout.fillWidth: true
             Layout.fillHeight: true
             color: "blue"
             Layout.columnSpan: 4
-            Text {
-                id: showpath
-                width: parent.width
-                wrapMode: Text.WordWrap
-            }
-
-            /*MouseArea {
-                anchors.fill: parent
-                onPressed: {
-                    console.log("kliknales w niebieskie")
+            Column {
+                spacing: 10
+                Text {
+                    id: showPath
+                    width: blueRectangle.width
+                    wrapMode: Text.WordWrap
                 }
-            }*/
-
+                Text {
+                    id: showSize
+                    width: blueRectangle.width
+                    wrapMode: Text.WordWrap
+                }
+            }
         }
 
     }
